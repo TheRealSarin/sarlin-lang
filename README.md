@@ -1,34 +1,44 @@
 # Sarlin
 
-Sarlin is an experimental general-purpose programming language with explicit,
-readable syntax and native compilation. This public repository contains the
-released compiler binaries, checksums, licenses and issue tracker. The compiler
-source is developed privately and is not published here.
+Sarlin is an experimental general-purpose programming language designed to be easy to read. It compiles to native executables through LLVM and Clang.
 
-Version 0.1.0 is the first experimental release. Syntax and semantics may still
-change, and it is not yet intended for production use.
+I wanted to learn more about compilers, how they work and if I could make one. I also wanted a language that could do things the way I want it. 
+So I made Sarlin. Sarlin is an acronym for my name, Florin Sarca and it's close enough to Starling to make me make the S out of birds for the logo. 
+
+It's quite a decent little thing and thought why not share it with people
+
+```sarlin
+func greet(name string) string {
+    return "Hello, " + name
+}
+
+func main() {
+    print(greet("world"))
+}
+```
+
+Sarlin includes explicit numeric types, strings, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, project-wide source files, and embedded C, C++, and Rust functions.
+
+Sarlin is still experimental. Its syntax and behaviour may change before a stable release, and it is not yet intended for production use.
 
 ## Download
 
-The first release targets Linux x86_64. Download these files from the
-[GitHub Releases](https://github.com/TheRealSarin/sarlin-lang/releases) page:
+Download the latest compiler from [GitHub Releases](https://github.com/TheRealSarin/sarlin-lang/releases/latest):
+
+| Platform | Download |
+| --- | --- |
+| Linux x86-64 | `sarlin-linux-x86_64.tar.gz` |
+| Windows x86-64 | `sarlin-windows-x86_64.zip` |
+| macOS Apple Silicon | `sarlin-macos-aarch64.tar.gz` |
+| macOS Intel | `sarlin-macos-x86_64.tar.gz` |
+
+Each download has a matching `.sha256` checksum file. Extract the archive, place `sarlin` or `sarlin.exe` somewhere on your `PATH`, then check the installation:
 
 ```text
-sarlin-linux-x86_64.tar.gz
-sarlin-linux-x86_64.tar.gz.sha256
-```
-
-Verify, extract and install the compiler:
-
-```sh
-sha256sum --check sarlin-linux-x86_64.tar.gz.sha256
-tar -xzf sarlin-linux-x86_64.tar.gz
-sudo install -m 755 sarlin /usr/local/bin/sarlin
 sarlin --version
 ```
 
-Sarlin needs `clang` 15 or newer to turn generated LLVM IR into a native
-executable. Checking source code does not require clang.
+Clang 15 or newer is required when building Sarlin programs. Embedded C++ functions also require `clang++`, and embedded Rust functions require `rustc`. Checking Sarlin source without building it does not require these tools.
 
 ## First project
 
@@ -36,24 +46,22 @@ executable. Checking source code does not require clang.
 sarlin new "My Project"
 sarlin my_project
 sarlin build my_project
-./my_project/output/my_project
 ```
 
-The generated `sarlin.project` marks the project root and records its required
-`name` and `entry`, plus the current language compatibility version. Every
-`.sar` file under its `source/` directory is compiled as part of the project.
+The executable is written to `my_project/output/my_project` on Linux and macOS, or `my_project/output/my_project.exe` on Windows.
 
-The complete language guide and standard-library reference are at
-[sarlin-lang.org](https://sarlin-lang.org).
+## Documentation
+
+Read the current language guide and standard-library reference at [sarlin-lang.org](https://sarlin-lang.org/).
 
 ## Issues and source availability
 
-Use the [issue tracker](https://github.com/TheRealSarin/sarlin-lang/issues) for
-bugs and feature requests. Compiler source and its development history remain
-private; releases contain only the executable and license texts.
+Use the [public issue tracker](https://github.com/TheRealSarin/sarlin-lang/issues) for bugs and feature requests. The compiler source and development history remain private; public releases contain the compiler executable and license texts.
 
 ## License
 
-Released binaries and this distribution repository are available under your
-choice of the [MIT License](LICENSE-MIT) or the
-[Apache License 2.0](LICENSE-APACHE): `MIT OR Apache-2.0`.
+Released binaries and the public distribution repository are available under your choice of the [MIT License](https://github.com/TheRealSarin/sarlin-lang/blob/main/LICENSE-MIT) or the [Apache License 2.0](https://github.com/TheRealSarin/sarlin-lang/blob/main/LICENSE-APACHE): `MIT OR Apache-2.0`.
+
+## Contributions
+
+At the moment I am working on it by myself, not quite sure what I should do in the future, if it gets a huge comunity one day I will probably make the compiler open-source as well so people can contribute. But for now it is a passion project
