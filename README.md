@@ -44,11 +44,26 @@ Clang 15 or newer is required when building Sarlin programs. Embedded C++ functi
 
 ```sh
 sarlin new "My Project"
-sarlin my_project
+sarlin check my_project
 sarlin build my_project
+sarlin run my_project
 ```
 
 The executable is written to `my_project/output/my_project` on Linux and macOS, or `my_project/output/my_project.exe` on Windows.
+
+Run `sarlin --help` to see all compiler commands. Passing a source file or project without a command remains shorthand for `sarlin check`.
+
+Native builds are optimized by default. Add `--debug` for an unoptimized build with debug information, or `--output <path>` to choose the executable location.
+
+## Compiler development
+
+The repository keeps Rust formatting, Clippy, native runtime regressions, C warnings, and platform builds as CI gates. On Linux or macOS, run the full Sarlin/Rust benchmark comparison with:
+
+```sh
+./benchmarks/run.sh
+```
+
+Pass benchmark names to run a subset, or use `./benchmarks/run.sh --build-only` to validate every benchmark without executing the workloads.
 
 ## Documentation
 
