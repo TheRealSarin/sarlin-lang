@@ -78,10 +78,16 @@ sarlin add acras@0.3.0
 sarlin add github.com/owner/repo
 sarlin remove acras
 sarlin update
+sarlin update --check
 sarlin collisions
+sarlin package-search [text]
+sarlin package-info acras
+sarlin package-list
 ```
 
-`add` records `require: acras 0.3.0` in `sarlin.project` (exact versions only). Packages added straight from GitHub are recorded with their address, as `require: name 1.0.0 https://github.com/owner/repo`. `update` moves every required package to its newest version.
+`add` records `require: acras 0.3.0` in `sarlin.project` (exact versions only). Packages added straight from GitHub are recorded with their address, as `require: name 1.0.0 https://github.com/owner/repo`. `update` moves every required package to its newest version. `update --check` only reports which packages have a newer version (`csv 0.1.0 can be updated to 0.1.1`) and changes nothing, so it is safe in CI; it exits with status 0 unless the lookup itself fails.
+
+`package-search` lists the packages in the Nook with their newest version and description, optionally only those whose name or description contains the text (ignoring case). `package-info <name>` shows a package's description, license, repository and versions, and which version your project uses. `package-list` shows the packages your project requires, with `(X available)` when the Nook has a newer version. All three are read-only: they never change `sarlin.project`, `sarlin.lock` or the downloaded packages, and `package-list` still shows names and versions when the Nook cannot be reached.
 
 `collisions` lists every name defined in more than one file across your project and its packages, since duplicate names stop a build. It prints `no collisions found` and exits with status 0 when clean, or one `warning:` line per name plus a summary and status 1, so CI can use it. It also reports a package that defines `func main`. `add` and `update` run the same check and print the warnings without failing.
 
