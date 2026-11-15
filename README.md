@@ -57,6 +57,16 @@ Run `sarlin --help` to see all compiler commands. Passing a source file or proje
 
 Native builds are optimized by default. Add `--debug` for an unoptimized build with debug information, or `--output <path>` to choose the executable location.
 
+## Editor support
+
+The Sarlin extension for VSCodium and VS Code adds syntax colouring, a colour picker for hexadecimal colour values, and a file icon for `.sar` files. Download [sarlin-language.vsix](https://github.com/TheRealSarin/sarlin-editors/releases/latest/download/sarlin-language.vsix) and install it:
+
+```sh
+codium --install-extension sarlin-language.vsix
+```
+
+The extension source lives in [sarlin-editors](https://github.com/TheRealSarin/sarlin-editors).
+
 ## Compiler development
 
 The repository keeps Rust formatting, Clippy, native runtime regressions, C warnings, and platform builds as CI gates. On Linux or macOS, run the full Sarlin/Rust benchmark comparison with:
