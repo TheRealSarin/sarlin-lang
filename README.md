@@ -17,7 +17,7 @@ func main() {
 }
 ```
 
-Sarlin includes explicit numeric types, strings, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, project-wide source files, and embedded C, C++, and Rust functions.
+Sarlin includes explicit numeric types, strings, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, basic TCP networking, project-wide source files, and embedded C, C++, and Rust functions.
 
 Sarlin is still experimental. Its syntax and behaviour may change before a stable release, and it is not yet intended for production use.
 
@@ -28,7 +28,9 @@ Download the latest compiler from [GitHub Releases](https://github.com/TheRealSa
 | Platform | Download |
 | --- | --- |
 | Linux x86-64 | `sarlin-linux-x86_64.tar.gz` |
+| Linux ARM64 | `sarlin-linux-aarch64.tar.gz` |
 | Windows x86-64 | `sarlin-windows-x86_64.zip` |
+| Windows ARM64 | `sarlin-windows-aarch64.zip` |
 | macOS Apple Silicon | `sarlin-macos-aarch64.tar.gz` |
 | macOS Intel | `sarlin-macos-x86_64.tar.gz` |
 
