@@ -57,6 +57,17 @@ Run `sarlin --help` to see all compiler commands. Passing a source file or proje
 
 Native builds are optimized by default. Add `--debug` for an unoptimized build with debug information, or `--output <path>` to choose the executable location.
 
+## Upgrading
+
+```sh
+sarlin upgrade --check
+sarlin upgrade
+```
+
+`sarlin upgrade --check` only reports whether a newer release exists. `sarlin upgrade` downloads the archive for your platform from the latest GitHub release, verifies its SHA-256 checksum against the published `.sha256` file, checks that the new binary reports the expected version, and then replaces the installed `sarlin`. Nothing is changed if any check fails. The network is used only by `sarlin upgrade`, never by other commands.
+
+If the install directory is not writable, Sarlin does not ask for elevated privileges. It saves the verified binary as `sarlin-<version>` in the current directory and tells you where it is, so you can copy it into place with the permissions your system requires. `sarlin upgrade` needs `curl` and `tar` on your path.
+
 ## Packages
 
 Packages are ordinary Sarlin projects published on GitHub and listed in the [Nook](https://github.com/TheRealSarin/sarlin-nook). Run these from a project folder, or pass the project folder as the last argument. They need `git` on your `PATH`.
