@@ -57,6 +57,27 @@ Run `sarlin --help` to see all compiler commands. Passing a source file or proje
 
 Native builds are optimized by default. Add `--debug` for an unoptimized build with debug information, or `--output <path>` to choose the executable location.
 
+## Packages
+
+Packages are ordinary Sarlin projects published on GitHub and listed in the [Nook](https://github.com/TheRealSarin/sarlin-nook). Run these from a project folder, or pass the project folder as the last argument. They need `git` on your `PATH`.
+
+```sh
+sarlin add acras
+sarlin add acras@0.3.0
+sarlin add github.com/owner/repo
+sarlin remove acras
+sarlin update
+sarlin collisions
+```
+
+`add` records `require: acras 0.3.0` in `sarlin.project` (exact versions only). Packages added straight from GitHub are recorded with their address, as `require: name 1.0.0 https://github.com/owner/repo`. `update` moves every required package to its newest version.
+
+`collisions` lists every name defined in more than one file across your project and its packages, since duplicate names stop a build. It prints `no collisions found` and exits with status 0 when clean, or one `warning:` line per name plus a summary and status 1, so CI can use it. It also reports a package that defines `func main`. `add` and `update` run the same check and print the warnings without failing.
+
+`sarlin.lock` sits next to `sarlin.project` and pins every package, including packages that other packages require, to a commit. Commit it with your project. `check`, `build` and `run` fetch any missing package at its locked commit, and compile each package's `source/` files together with your own. A package must not define `func main`. Projects without `require:` lines never use git.
+
+Downloaded packages are cached in `~/.sarlin/nook` (`%USERPROFILE%\.sarlin\nook` on Windows). Set `SARLIN_NOOK_HOME` to move the cache, or `SARLIN_NOOK_INDEX` to read the package list from another git repository.
+
 ## Editor support
 
 The Sarlin extension for VSCodium and VS Code adds syntax colouring, a colour picker for hexadecimal colour values, and a file icon for `.sar` files. Download [sarlin-language.vsix](https://github.com/TheRealSarin/sarlin-editors/releases/latest/download/sarlin-language.vsix) and install it:
