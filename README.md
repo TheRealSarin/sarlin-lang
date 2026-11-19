@@ -17,7 +17,7 @@ func main() {
 }
 ```
 
-Sarlin includes explicit numeric types, strings, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, basic TCP networking, project-wide source files, and embedded C, C++, and Rust functions.
+Sarlin includes explicit numeric types, strings with escape sequences, a `TextBuilder` for building text in place, raw bytes as `uint8[]` with exact binary output, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, random numbers, basic TCP networking, project-wide source files, and embedded C, C++, and Rust functions. Memory is managed without a garbage collector: every value has a single owner that the compiler checks, and threads started with `run` and `together` cannot share data, so programs are free of data races.
 
 Sarlin is still experimental. Its syntax and behaviour may change before a stable release, and it is not yet intended for production use.
 
@@ -56,6 +56,8 @@ The executable is written to `my_project/output/my_project` on Linux and macOS, 
 Run `sarlin --help` to see all compiler commands. Passing a source file or project without a command remains shorthand for `sarlin check`.
 
 Native builds are optimized by default. Add `--debug` for an unoptimized build with debug information, or `--output <path>` to choose the executable location.
+
+Builds target a baseline processor of their architecture so the executable runs on any machine of that kind. Add `--cpu native` to optimize for the machine doing the build, or name a target such as `--cpu x86-64-v3` or `--cpu znver4` to use its instructions on every machine that supports them. The executable may not start on older processors. `--cpu baseline` keeps the default.
 
 ## Upgrading
 
