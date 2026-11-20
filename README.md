@@ -17,7 +17,7 @@ func main() {
 }
 ```
 
-Sarlin includes explicit numeric types, strings with escape sequences, a `TextBuilder` for building text in place, raw bytes as `uint8[]` with exact binary output, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, random numbers, basic TCP networking, project-wide source files, and embedded C, C++, and Rust functions. Memory is managed without a garbage collector: every value has a single owner that the compiler checks, and threads started with `run` and `together` cannot share data, so programs are free of data races.
+Sarlin includes explicit numeric types, strings with escape sequences, a `TextBuilder` for building text in place, raw bytes as `uint8[]` with exact binary output, arrays, dictionaries, functions, classes assembled from reusable defines, callables, signals, checked arithmetic, random numbers, basic TCP networking, project-wide source files, direct calls into C libraries by importing their headers (structs, pointers, callbacks, unions, variadic functions and macros included, with libraries linked or built from source through `sarlin.project`), and embedded C, C++, and Rust functions. Memory is managed without a garbage collector: every value has a single owner that the compiler checks, and threads started with `run` and `together` cannot share data, so programs are free of data races.
 
 Sarlin is still experimental. Its syntax and behaviour may change before a stable release, and it is not yet intended for production use.
 
@@ -105,7 +105,13 @@ The Sarlin extension for VSCodium and VS Code adds syntax colouring, a colour pi
 codium --install-extension sarlin-language.vsix
 ```
 
-The extension source lives in [sarlin-editors](https://github.com/TheRealSarin/sarlin-editors).
+For Vim and Neovim, install the plugin from the same repository. With vim-plug:
+
+```vim
+Plug 'TheRealSarin/sarlin-editors', { 'rtp': 'vim' }
+```
+
+lazy.nvim and manual installation are covered in [the editor repository README](https://github.com/TheRealSarin/sarlin-editors#vim-and-neovim), which also holds the extension source.
 
 ## Compiler development
 
